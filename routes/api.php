@@ -15,11 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::resource('products', ProductController::class);
+
 // fetch all products
-Route::get('/products', [ProductController::class, 'index']);
+// Route::get('/products', [ProductController::class, 'index']);
 
 // create a product
-Route::post('/products', [ProductController::class, 'store']);
+// Route::post('/products', [ProductController::class, 'store']);
+
+// search a product by name
+Route::get('/products/search/{name}', [ProductController::class, 'search']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
