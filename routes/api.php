@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 // --------------------------------- Public routes ----------------------------------------------------
 // splitting resources for api auth protection
 // Route::resource('products', ProductController::class);
+
+// register a user
+Route::post('/register', [AuthController::class, 'register']);
+
+// user login
+Route::post('/login', [AuthController::class, 'login']);
 
 // fetch all products
 Route::get('/products', [ProductController::class, 'index']);
@@ -38,4 +44,7 @@ Route::group(['middleware'=> ['auth:sanctum']] , function () {
 
     // delete a product
     Route::delete('/products/{id}', [ProductController::class, 'delete']);
+
+    // logout a user with token
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
